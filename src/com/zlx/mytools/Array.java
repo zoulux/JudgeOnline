@@ -1,8 +1,19 @@
 package com.zlx.mytools;
 
-import java.util.Arrays;
 
 public class Array {
+public static void print(String A[][],int n,int m) {
+		
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				System.out.print(A[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	
+	
 	public static void print(int A[][]) {
 		
 		for (int i = 0; i < A.length; i++) {

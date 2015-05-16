@@ -6,7 +6,9 @@
 package com.zlx.nyoj;
 
 import java.io.BufferedInputStream;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -50,7 +52,7 @@ public class e12 {
 				vector.add(circ);
 			}
 			solve(n, w, h);
-
+		
 		}
 		cin.close();
 	}
