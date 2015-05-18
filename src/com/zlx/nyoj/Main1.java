@@ -1,21 +1,31 @@
 package com.zlx.nyoj;
- 
-import java.io.BufferedInputStream;
 
-public class Main{
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+
+public class Main1 {
 	static int[][] arr = new int[102][102];
-	static BufferedInputStream bis = new BufferedInputStream(System.in);
+
+	static StreamTokenizer st = new StreamTokenizer(new BufferedReader(
+			new InputStreamReader(System.in)));
 
 	public static void main(String[] args) throws Exception {
 		int nCase, row, col, max;
-		nCase = getInt();
+		st.nextToken();
+		nCase = (int) st.nval;
 		while (nCase-- != 0) {
-			row = getInt();
-			col = getInt();
+			st.nextToken();
+			row = (int) st.nval;
+			st.nextToken();
+			col = (int) st.nval;
+
 			// 输入,并处理，连续和的小技巧
 			for (int r = 1; r <= row; r++) {
 				for (int c = 1; c <= col; c++) {
-					arr[r][c] = getInt();
+					st.nextToken();
+					arr[r][c] = (int) st.nval;
 					arr[r][c] += arr[r - 1][c];
 				}
 			}
@@ -37,22 +47,7 @@ public class Main{
 			}
 			System.out.println(max);
 		}
-		bis.close();
+
 	}
 
-	static int getInt() throws Exception {
-		int i, temp = 0, mark = 1;
-		while ((i = bis.read()) < 45)
-			;
-		if (i == 45) {
-			mark = -1;
-			i = bis.read();
-		}
-		while (i > 47) {
-			temp = temp * 10 + i - 48;
-			i = bis.read();
-		}
-		return temp * mark;
-	}
 }
-        

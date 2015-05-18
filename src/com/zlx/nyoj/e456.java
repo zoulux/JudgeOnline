@@ -5,43 +5,57 @@
 
 package com.zlx.nyoj;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Vector;
 
 public class e456 {
-	static Scanner cin = new Scanner(new BufferedInputStream(System.in));
-	static Vector<Integer> vector = new Vector<Integer>();
+	static StreamTokenizer st = new StreamTokenizer(new BufferedReader(
+			new InputStreamReader(System.in)));
 
-	public static void main(String[] args) {
-		int m = cin.nextInt();
+	static int[] A = new int[1005];
+	static int[] dp = new int[50005];
+
+	public static void main(String[] args) throws IOException {
+		st.nextToken();
+		int m = (int) st.nval;
 		while (m-- > 0) {
-			vector.clear();
-			int n = cin.nextInt();
+		
+			Arrays.fill(A, 0);
+			Arrays.fill(dp, 0);
+
+			st.nextToken();
+			int n = (int) st.nval;
 			int sum = 0;
-			for (int i = 0; i < n; i++) {
-				int t = cin.nextInt();
-				vector.add(t);
+
+			for (int i = 1; i <= n; i++) {
+				st.nextToken();
+				int t = (int) st.nval;
+				A[i] = t;
 				sum += t;
 			}
 
 			solve(sum, n);
 		}
-		cin.close();
+
 	}
 
 	private static void solve(int sum, int n) {
-		int sum2 = sum / 2;
-		int dp[] = new int[sum2 + 1];
-
-		for (int i = 0; i < n; i++) {
-			for (int j = sum2; j >= vector.get(i); j--) {
-				dp[j] = Math.max(dp[j - vector.get(i)] + vector.get(i), dp[j]);
-				
+		int sum2=sum>>1;
+		for (int i = 1; i <= n; i++) {
+			for (int j = sum2; j >= A[i]; j--) {
+				dp[j] = max(dp[j], dp[j - A[i]] + A[i]);
 			}
 		}
 		System.out.println(sum - dp[sum2] * 2);
+
 	}
+
+	private static int max(int i, int j) {
+
+		return i > j ? i : j;
+	}
+
 }
